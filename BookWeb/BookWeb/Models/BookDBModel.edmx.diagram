@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b22044d1c73947f49066f1c92d54f8b7" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="BookDBModel.Admin" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookDBModel.Book" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookDBModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookDBModel.Customer" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookDBModel.Order" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookDBModel.OrdersItem" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="BookDBModel.FK__Books__CategoryI__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="BookDBModel.FK__OrdersIte__BookI__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="BookDBModel.FK__Orders__Customer__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="BookDBModel.FK__OrdersIte__Order__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

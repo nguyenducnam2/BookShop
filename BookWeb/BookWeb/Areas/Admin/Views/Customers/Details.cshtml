@@ -1,0 +1,131 @@
+﻿@model BookWeb.Models.Customer
+@using BookWeb.Models;
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thông Tin Khách Hàng</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Họ Và Tên
+                            </th>
+                            <th>
+                                Số Điện Thoại
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                               Số Đơn Hàng Đã Đặt
+                            </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Name
+                            </td>
+                            <td>
+                                @Model.Phone
+                            </td>
+                            <td>
+                                @Model.Email
+                            </td>
+                            <td>
+                                @Model.Orders.Count
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Danh Sách Đơn Hàng</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Mã Đơn Hàng
+                                    </th>
+                                    <th>
+                                        Địa Chỉ Giao Nhận
+                                    </th>
+                                    <th>
+                                        Hình Thức Thanh Toán
+                                    </th>
+                                    <th>
+                                        Tổng Tiền
+                                    </th>
+                                    <th>
+                                        Trạng Thái
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Order order in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>
+                                            @order.Id
+                                        </td>
+                                        <td>
+                                            @order.Address
+                                        </td>
+                                        <td>
+                                            @order.Payment
+                                        </td>
+                                        <td>
+                                            @order.Total
+                                        </td>
+                                        @if (order.Status == 0)
+                                        {
+                                            <td style="color:forestgreen;">
+                                                Đã Xác Nhận
+                                            </td>
+                                        }
+                                        @if (order.Status == 1)
+                                        {
+                                            <td style="color:red;">
+                                                Đang Chờ
+                                            </td>
+                                        }
+                                        @if (order.Status == 2)
+                                        {
+                                            <td style="color:red;">
+                                                Bị Hủy
+                                            </td>
+                                        }
+                                            <td>
+                                                <a href="/admin/customers/processOrder/?id=@order.Id&status=0" style="width:99px;" class="btn btn-success">Xác Nhận</a>
+                                                <a href="/admin/customers/processOrder/?id=@order.Id&status=2" style="width:99px;" class="btn btn-danger">Từ Chối</a>
+                                            </td>
+                                    </tr>
+                                }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

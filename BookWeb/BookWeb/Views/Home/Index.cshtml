@@ -1,0 +1,75 @@
+﻿@using BookWeb.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Common common = (Common)HttpContext.Current.Application["Categories"];
+}
+
+<!-- Slider -->
+
+<div class="main_slider" style="background-image: url(/Content/Web/images/book_slider.jpg)">
+    <div class="container fill_height">
+        <div class="row align-items-center fill_height">
+            <div class="col">
+                <div class="main_slider_content" style="color:antiquewhite;">
+                    <h6>BOOKSHOP Gía Rẻ</h6>
+                    <h1>Uy Tín - Bảo Hành - Chất Lượng</h1>
+                    <div class="red_button shop_now_button"><a href="/Products">Mua Sắm Ngay</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Arrivals -->
+
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Các Loại Sách Hiện Nay</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất Cả</li>
+                        @foreach (Category category in common.Categories)
+                        {
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@category.name">@category.name</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+                    <!-- Foreach -->
+                    @foreach (Book book in common.Books)
+                    {
+                        <div class="product-item @book.Category.name">
+                            <div class="product discount product_filter">
+                                <div class="product_image">
+                                    <a href="/Products/Detail/@book.Id">
+                                        <img src="@Url.Content(book.Image)" width="100" height="240" alt="">
+                                    </a>
+                                </div>
+                                <div class="favorite favorite_left"></div>
+                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>@book.Price</span></div>
+                                <div class="product_info">
+                                    <h6 class="product_name"><a href="/Products/Detail/@book.Id">@book.Title</a></h6>
+                                    <div class="product_price">@book.Description</div>
+                                </div>
+                            </div>
+                            <div class="red_button add_to_cart_button"><a href="/Products/Detail/@book.Id">Xem Thêm</a></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BookWeb.Models.CartItem>
+
+@if (Model != null && Model.Any())
+{
+    <h4><label>Giỏ Hàng</label></h4>
+    var i = 0;
+    var final = 0;
+    <ul>
+        @foreach (var item in Model)
+        {
+            final += item.Total;
+            <li>
+                <p>@item.BookTitle - @item.Quantity</p>
+            </li>
+        }
+        <li>
+            <p>
+                Tổng Tiền : @final VND
+            </p>
+        </li>
+    </ul>
+}

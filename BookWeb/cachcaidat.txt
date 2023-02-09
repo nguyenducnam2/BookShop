@@ -1,0 +1,9 @@
+- Mở SQLServer 
+- Tạo Database đặt tên là : BookDB
+- Import code file bookdb.sql
+- Mở Visual Code
+- Mở file web.config sửa lại chuỗi kết nối url ,user ,password ở thẻ <connectionStrings>
+- Run chạy demo
+- Tải khoản admin quản trị web
++ tên đăng nhập : admin
++ pass : 123

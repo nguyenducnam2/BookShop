@@ -1,0 +1,100 @@
+﻿@model IEnumerable<BookWeb.Models.CartItem>
+@using BookWeb.Models;
+
+@{
+    ViewBag.Title = "checkOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Customer customer = (Customer)HttpContext.Current.Session["Customer"];
+    var mess = ViewBag.Mess;
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container ">
+    <div class="row">
+        @if (customer != null)
+        {
+            if (mess == null)
+            {
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h1>Thanh Toán</h1>
+                            <p>Vui Lòng Kiểm tra đơn hàng</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form action="/cart/checkout" method="post">
+                                <div class="form-group">
+                                    <label>Họ Và Tên</label>
+                                    <input name="CustomerName" value="@customer.Name" class="form-control" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>Số Điện Thoại</label>
+                                    <input name="CustomerPhone" value="@customer.Phone" class="form-control" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input name="CustomerEmail" value="@customer.Phone" class="form-control" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label>Nhập Địa Chỉ Thanh Toán</label>
+                                    <input name="address" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Phương Thức Thanh Toán</label>
+                                    <br />
+                                    <select name="payment">
+                                        <option value="offline">Trực Tiếp Khi Nhận Hàng</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Đặt Hàng</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            @if (Model != null && Model.Any())
+                            {
+                                <h4><label>Giỏ Hàng</label></h4>
+                                var i = 0;
+                                var final = 0;
+                                <ul>
+                                    @foreach (var item in Model)
+                                    {
+                                        final += item.Total;
+                                        <li>
+                                            <p>Sách: @item.BookTitle , Số lượng: @item.Quantity</p>
+                                        </li>
+                                    }
+                                    <li>
+                                        <p>
+                                            Tổng Tiền : @final VND
+                                        </p>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+    else
+                {
+                    <h2>@mess</h2>
+                mess = null;
+            }
+        }
+        else
+        {
+            <p>Bạn Chưa Đăng Nhập</p>
+        }
+    </div>
+</div>

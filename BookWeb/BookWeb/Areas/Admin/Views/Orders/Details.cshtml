@@ -1,0 +1,115 @@
+﻿@model BookWeb.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Thông Tin Khách Hàng</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Họ Và Tên
+                                    </th>
+                                    <th>
+                                        Số Điện Thoại
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Địa Chỉ Thanh Toán
+                                    </th>     
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>
+                                            @Model.Customer.Name
+                                        </td>
+                                        <td>
+                                            @Model.Customer.Phone
+                                        </td>
+                                        <td>
+                                           @Model.Customer.Email
+                                        </td>
+                                        <td>
+                                            @Model.Address
+                                        </td>
+                                    </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Chi Tiết Đơn Hàng</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Sách
+                                    </th>
+                                    <th>
+                                        Bìa
+                                    </th>
+                                    <th>
+                                        Loại Sách
+                                    </th>
+                                    <th>
+                                        Số Lượng
+                                    </th>
+                                    <th>
+                                        Hợp Gía
+                                    </th>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrdersItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Book.Title
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content(item.Book.Image)" width="50" height="50" />
+                                        </td>
+                                        <td>
+                                            @item.Book.Category.name
+                                        </td>
+                                        <td>
+                                            @item.Quantity
+                                        </td>
+                                        <td>
+                                            @item.Subtotal
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="5">
+                                        <a href="/admin/orders/processOrder/?id=@Model.Id&status=0" class="btn btn-success">Xác Nhận</a>
+                                        <a href="/admin/orders/processOrder/?id=@Model.Id&status=2" class="btn btn-danger">Từ Chối</a>
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

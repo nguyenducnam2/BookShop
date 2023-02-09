@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@using (Html.BeginForm("Login","Home",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @if (ViewBag.Mess != null)
+        {
+            <h4 class="text-center" style="color:red;">@ViewBag.Mess</h4>
+            ViewBag.Mess = null;
+        }
+        <h2 class="text-center">Đăng Nhập</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+         <label class="control-label col-md-2">Tên Đăng Nhập</label>
+            <div class="col-md-10">
+              <input class="form-control" name="username"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Mật Khẩu</label>
+            <div class="col-md-10">
+                <input class="form-control" name="password" type="password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Đăng Nhập" class="btn btn-primary" />
+                <a href="/Home" class="btn btn-danger">Trang Chủ</a>
+            </div>
+        </div>
+    </div>
+}
+
